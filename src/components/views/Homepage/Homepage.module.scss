@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  font-family: arial;
+  background-color: black;
+
+  .pokemon {
+    margin: 0 auto;
+    max-width: 200px;
+    transition: .1s;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+
+    &:hover {
+      font-size: 30px;
+      color: chocolate;
+      cursor: pointer;
+    }
+  }
+}
