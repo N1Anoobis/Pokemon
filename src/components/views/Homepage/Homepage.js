@@ -8,19 +8,19 @@ import { useHistory } from 'react-router-dom';
 
 const Component = ({ className, getPokemons, readPokemons, getSpecificPokemon }) => {
 
-  useEffect(() => {
-    getPokemons();
-  }, [getPokemons]);
+  const history = useHistory();
+  const [pokemons, setPokemons] = useState();
+ 
+  if (readPokemons && (!pokemons)) {
+    setPokemons(readPokemons);
+  }
 
   let finalPokemons = [];
 
-  if (readPokemons) {
-    finalPokemons = [...readPokemons];
-    console.log(finalPokemons);
-  }
-
-  const history = useHistory();
-  const [pokemons, setPokemons] = useState(readPokemons);
+  useEffect(() => {
+    getPokemons();
+    setPokemons(readPokemons);
+  }, []);
 
   const getSinglePokemon = (name) => {
     getSpecificPokemon(name);
@@ -34,27 +34,27 @@ const Component = ({ className, getPokemons, readPokemons, getSpecificPokemon })
 
   const handleChange = (e) => {
     const searchWord = (e.target.value.toLowerCase());
-    
+
     finalPokemons = readPokemons.filter(pokemon => pokemon.name.includes(searchWord));
-    console.log(finalPokemons);
+
     setPokemons(finalPokemons);
   };
 
   return (
-    <>
+    <div className={clsx(className, styles.root)}>
       <label htmlFor="">
         <input type="text"
           onChange={handleChange}
           placeholder="Enter pokemon" />
       </label>
-      <div className={clsx(className, styles.root)}>
+      <div >
         {pokemons ?
-          pokemons.map(pokemon => <div className={styles.pokemon} key={pokemon.name} 
-            onClick={() => getSinglePokemon(pokemon.name)}> {pokemon.name} </div>) 
+          pokemons.map(pokemon => <div className={styles.pokemon} key={pokemon.name}
+            onClick={() => getSinglePokemon(pokemon.name)}> {pokemon.name} </div>)
           : null
         }
       </div>
-    </>
+    </div>
   );
 };
 

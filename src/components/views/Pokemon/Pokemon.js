@@ -8,11 +8,7 @@ import { getPokemon } from '../../../redux/pokemonsRedux';
 const Component = ({ className, getOne }) => {
 
   useEffect(() => {
-    console.log(getOne);
   }, [getOne]);
-
-
-  console.log(getOne);
 
   return (
     <>

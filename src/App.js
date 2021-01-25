@@ -13,7 +13,6 @@ const App = () => (
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route exact path='/pokemons/:id' component={Pokemon} />
-          {/* <Route path='*' component={NotFound} /> */}
         </Switch>
       </MainLayout>
     </BrowserRouter>
