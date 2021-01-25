@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import styles from './Homepage.module.scss';
@@ -8,13 +8,19 @@ import { useHistory } from 'react-router-dom';
 
 const Component = ({ className, getPokemons, readPokemons, getSpecificPokemon }) => {
 
-  const history = useHistory();
-
   useEffect(() => {
     getPokemons();
-
   }, [getPokemons]);
-  console.log(readPokemons);
+
+  let finalPokemons = [];
+
+  if (readPokemons) {
+    finalPokemons = [...readPokemons];
+    console.log(finalPokemons);
+  }
+
+  const history = useHistory();
+  const [pokemons, setPokemons] = useState(readPokemons);
 
   const getSinglePokemon = (name) => {
     getSpecificPokemon(name);
@@ -26,11 +32,29 @@ const Component = ({ className, getPokemons, readPokemons, getSpecificPokemon })
     history.push(path);
   };
 
+  const handleChange = (e) => {
+    const searchWord = (e.target.value.toLowerCase());
+    
+    finalPokemons = readPokemons.filter(pokemon => pokemon.name.includes(searchWord));
+    console.log(finalPokemons);
+    setPokemons(finalPokemons);
+  };
+
   return (
-    <div className={clsx(className, styles.root)}>
-      {readPokemons ? readPokemons.map(pokemon => <div className={styles.pokemon} key={pokemon.name} onClick={() => getSinglePokemon(pokemon.name)}> {pokemon.name} </div>) : null
-      }
-    </div>
+    <>
+      <label htmlFor="">
+        <input type="text"
+          onChange={handleChange}
+          placeholder="Enter pokemon" />
+      </label>
+      <div className={clsx(className, styles.root)}>
+        {pokemons ?
+          pokemons.map(pokemon => <div className={styles.pokemon} key={pokemon.name} 
+            onClick={() => getSinglePokemon(pokemon.name)}> {pokemon.name} </div>) 
+          : null
+        }
+      </div>
+    </>
   );
 };
 
