@@ -10,7 +10,7 @@ const Component = ({ className, getPokemons, readPokemons, getSpecificPokemon })
 
   const history = useHistory();
   const [pokemons, setPokemons] = useState();
- 
+
   if (readPokemons && (!pokemons)) {
     setPokemons(readPokemons);
   }
@@ -47,6 +47,8 @@ const Component = ({ className, getPokemons, readPokemons, getSpecificPokemon })
           onChange={handleChange}
           placeholder="Enter pokemon" />
       </label>
+      <div className={styles.link}><a href="https://github.com/N1Anoobis/Pokemon">Link to Repo</a></div>
+      <div className={styles.link}></div>
       <div >
         {pokemons ?
           pokemons.map(pokemon => <div className={styles.pokemon} key={pokemon.name}
