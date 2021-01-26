@@ -21,7 +21,6 @@ const combinedReducers = combineReducers(reducers);
 // create store
 export const store = createStore(
   combinedReducers,
-  //   initialState,
   composeWithDevTools(
     applyMiddleware(thunk)
   )

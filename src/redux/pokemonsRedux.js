@@ -27,7 +27,7 @@ export const loadPokemons = () => {
 
     dispatch(fetchStarted());
     Axios
-      .get(`https://pokeapi.co/api/v2/pokemon?limit=25&offset=25`)
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=125&offset=125`)
       .then(res => {
         dispatch(fetchSuccess(res.data.results));
       })

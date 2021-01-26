@@ -15,10 +15,8 @@ const Component = ({ className, getOne }) => {
       {getOne ? <div className={clsx(className, styles.root)}>
         <h2>{getOne.name}</h2>
         <img src={getOne.sprites.front_default} alt="" />
-        <h3>{getOne.stats.[0].stat.name} : {getOne.stats.[0].base_stat}</h3>
-        <h3>{getOne.stats.[1].stat.name} : {getOne.stats.[1].base_stat}</h3>
-        <h3>{getOne.stats.[2].stat.name} : {getOne.stats.[2].base_stat}</h3>
-        <h3>{getOne.stats.[3].stat.name} : {getOne.stats.[3].base_stat}</h3>
+        {getOne.stats.map( (stats,index) => 
+        { return <h3 key={index}>{stats.stat.name} : {stats.base_stat}</h3>;})}
       </div>
         : null}
     </>
